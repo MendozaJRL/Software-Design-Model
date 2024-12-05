@@ -45,11 +45,12 @@ def main():
                 
                 # Loop through detections and draw bounding boxes with OpenCV
                 for result in results[0].boxes.data.tolist():  # Assuming YOLOv8 outputs boxes as list
-                    x1, y1, x2, y2, confidence, class_id = map(int, result[:6])
-                    original_label = model.names[class_id]
+                    x1, y1, x2, y2, confidence, class_id = result[0], result[1], result[2], result[3], result[4], result[5]
+                    confidence = round(confidence, 2)  # Round confidence to 2 decimal places
+                    class_name = model.names[class_id]
                     
                     # Map the detected label using label_map
-                    class_name = label_map.get(original_label, original_label)
+                    class_name = label_map.get(class_name, class_name)
                     
                     # Draw bounding box with increased thickness
                     cv2.rectangle(annotated_image, (x1, y1), (x2, y2), (255, 255, 0), 4)
