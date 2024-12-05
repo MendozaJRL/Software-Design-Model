@@ -11,6 +11,16 @@ label_map = {
     'Harvesting': 'Harvesting'
 }
 
+def preprocess_image_with_green_hue(image_path):
+    img = cv2.imread(image_path)
+    if img is None:
+        print(f"Error loading image: {image_path}")
+        return None
+    hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    hsv_img[:, :, 0] = 60
+    green_hued_img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2BGR)
+    return green_hued_img
+
 # Streamlit app
 def main():
     st.title("Lumina Flora: Plant Growth Stage Detection Model")
@@ -25,6 +35,9 @@ def main():
     # Conditional display for file uploader based on plant type selection
     if option != "None":
         uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
+
+        if option == "Thurinus Lettuce":
+            uploaded_file = preprocess_image_with_green_hue(image_path)
         
         if uploaded_file:
             # Read the uploaded image as a numpy array
