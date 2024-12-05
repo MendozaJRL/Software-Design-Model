@@ -6,17 +6,7 @@ def main():
     st.write("The plant growth stage detecion model is a YOLOv8 Model that is capable of detecting plant growth stages specifically, germination, growing, and harvesting.")
 
     # Provide options for users to choose from
-    option = st.selectbox("Select which item to craft", ["Spring", "Nail" , "Scrap Metal", 
-                                                         "Silver Ingot", "Gold Ingot", "Diamond Ingot", "Void Ingot",
-                                                         "Silver Crafting Rune", "Amethyst Crafting Rune", "Gold Crafting Rune",
-                                                         "Rusty Plank", "Normal Plank", "Reinforced Plank", "Fossil Plank", "Diamond Plank",
-                                                         "Rope", "Sewing Kit",
-                                                         "Broken Stock", "Broken Body", "Broken Barrel",
-                                                         "Normal Stock", "Normal Body", "Normal Barrel",
-                                                         "Good Stock", "Good Body", "Good Barrel",
-                                                         "Advanced Stock", "Advanced Body", "Advanced Barrel",
-                                                         "Morano", "Silver Morano", "Gold Morano", "Diamond Morano"
-                                                        ])
+    option = st.selectbox("Select Plant Type:", ["Level 1: Olmetie Lettuce", "Level 2: Thurinus Lettuce"])
     multiplier = st.number_input("Quantity", min_value=1, max_value=100, value=1, step=1)
     if st.button("Calculate Materials"):
         # Display the calculated materials in a more organized way using Markdown
