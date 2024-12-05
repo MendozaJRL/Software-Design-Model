@@ -40,6 +40,9 @@ def main():
                 # Make predictions
                 results = model.predict(source=image, save=False, conf=0.25)  # Adjust confidence threshold as needed
                 
+                # Initialize a list to store detection results
+                detection_results = []
+                
                 # Get the original image dimensions
                 annotated_image = image.copy()
                 
@@ -88,7 +91,7 @@ def main():
                         st.write(f"**Confidence**: {result['Confidence']}")
                         st.write(f"**Bounding Box**: {result['Bounding Box']}")
                         st.write("-----")
-                        
+                
                 # Convert the annotated image to RGB for display in Streamlit
                 st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
     
