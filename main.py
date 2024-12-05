@@ -5,21 +5,28 @@ from ultralytics import YOLO
 # Streamlit app
 def main():
     st.title("Lumina Flora: Plant Growth Stage Detection Model")
-    st.write("The plant growth stage detecion model is a YOLOv8 Model that is capable of detecting plant growth stages specifically, germination, growing, and harvesting.")
+    st.write("The plant growth stage detection model is a YOLOv8 Model that is capable of detecting plant growth stages: germination, growing, and harvesting.")
 
     # Load your YOLOv8 model
     model = YOLO("40 Epoch Plant Growth Stage YOLOv8 Model.pt")
     
     # Provide options for users to choose from
-    option = st.selectbox("Select Plant Type:", ["Level 1: Olmetie Lettuce", "Level 2: Thurinus Lettuce"])
-
-    # File uploader
-    uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
+    option = st.selectbox("Select Plant Type:", ["Select a plant type", "Level 1: Olmetie Lettuce", "Level 2: Thurinus Lettuce"])
     
-    if st.button("Detect Growth Stage"):
-        # Display the calculated materials in a more organized way using Markdown
-        st.markdown("### Results:")
+    # Conditional display for file uploader based on plant type selection
+    if option != "Select a plant type":
+        st.write(f"You selected: {option}")
+        uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
         
+        if uploaded_file:
+            # Detect growth stage button and results display
+            if st.button("Detect Growth Stage"):
+                # Placeholder for model inference (add your detection logic here)
+                st.markdown("### Results:")
+                st.write("Detection complete! (Placeholder for model output)")
+    else:
+        st.write("Please select a plant type to proceed.")
+    
     st.write("")
     st.write("Made by Team 45")
                     
