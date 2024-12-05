@@ -22,8 +22,7 @@ def main():
             # Detect growth stage button and results display
             if st.button("Detect Growth Stage"):
                 image = Image.open(uploaded_file)
-                
-                results = model(original_img)
+                results = model(image)
                 boxes = results[0].boxes.xyxy
                 confidences = results[0].boxes.conf
                 labels = results[0].boxes.cls
