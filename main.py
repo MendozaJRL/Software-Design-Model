@@ -22,14 +22,34 @@ def main():
             # Detect growth stage button and results display
             if st.button("Detect Growth Stage"):
                 image = Image.open(uploaded_file)
-                results = model.predict(source=image, save=False, conf=0.25)
-                st.markdown("### Results:")
-                for r in results:
-                    st.write(f"Detected {r['name']} with confidence: {r['confidence']:.2f}")
+                
+                results = model(original_img)
+                boxes = results[0].boxes.xyxy
+                confidences = results[0].boxes.conf
+                labels = results[0].boxes.cls
+                detected_labels = [results[0].names[int(label)] for label in labels]
+                updated_labels = []
 
-                # Save and display the prediction image with annotations
-                annotated_image = results[0].plot()  # Annotate first result
-                st.image(annotated_image, caption="Detected Growth Stages", use_column_width=True)
+                for label in detected_labels:
+                    if label in label_map:
+                        updated_labels.append(label_map[label])
+                    else:
+                        updated_labels.append(label)
+        
+                for i, (box, newlabel, confidence) in enumerate(zip(boxes, updated_labels, confidences)):
+                    x1, y1, x2, y2 = map(int, box)
+                    color = (255, 255, 0)
+                    cv2.rectangle(original_img, (x1, y1), (x2, y2), color, 10)
+                    label_str = f"{newlabel} ({confidence:.2f})"
+                    font = cv2.FONT_HERSHEY_SIMPLEX
+                    font_scale = 1.5
+                    font_thickness = 2
+                    text_size = cv2.getTextSize(label_str, font, font_scale, font_thickness)[0]
+                    text_x, text_y = x1, y1 - 10
+                    label_bg_x2 = text_x + text_size[0] + 8
+                    label_bg_y2 = text_y + text_size[1] + 4
+                    cv2.rectangle(original_img, (text_x - 2, text_y - text_size[1] - 5), (label_bg_x2, label_bg_y2), (255, 255, 0), -1)
+                    cv2.putText(original_img, label_str, (text_x, text_y), font, font_scale, (0, 0, 0), font_thickness)
                     
     st.write("")
     st.write("Made by Team 45")
