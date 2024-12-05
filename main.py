@@ -1,5 +1,6 @@
 import streamlit as st
 import cv2
+import numpy as np
 from PIL import Image
 from ultralytics import YOLO
 
@@ -20,13 +21,16 @@ def main():
         uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
         
         if uploaded_file:
+            # Convert the uploaded image to a NumPy array
+            image = Image.open(uploaded_file)
+            image_np = np.array(image)
+            
             # Detect growth stage button and results display
             if st.button("Detect Growth Stage"):
-                image = Image.open(uploaded_file)
-                results = model(image)
-                boxes = results[0].boxes.xyxy
-                confidences = results[0].boxes.conf
-                labels = results[0].boxes.cls
+                results = model(image_np)
+                boxes = results[0].boxes.xyxy.cpu().numpy()  # Convert to numpy
+                confidences = results[0].boxes.conf.cpu().numpy()
+                labels = results[0].boxes.cls.cpu().numpy()
                 detected_labels = [results[0].names[int(label)] for label in labels]
                 updated_labels = []
 
@@ -42,22 +46,29 @@ def main():
                         updated_labels.append(label_map[label])
                     else:
                         updated_labels.append(label)
-        
+
+                # Annotate the image using OpenCV
+                annotated_image = image_np.copy()
                 for i, (box, newlabel, confidence) in enumerate(zip(boxes, updated_labels, confidences)):
                     x1, y1, x2, y2 = map(int, box)
                     color = (255, 255, 0)
-                    cv2.rectangle(image, (x1, y1), (x2, y2), color, 10)
+                    cv2.rectangle(annotated_image, (x1, y1), (x2, y2), color, 2)
                     label_str = f"{newlabel} ({confidence:.2f})"
                     font = cv2.FONT_HERSHEY_SIMPLEX
-                    font_scale = 1.5
-                    font_thickness = 2
+                    font_scale = 0.5
+                    font_thickness = 1
                     text_size = cv2.getTextSize(label_str, font, font_scale, font_thickness)[0]
                     text_x, text_y = x1, y1 - 10
-                    label_bg_x2 = text_x + text_size[0] + 8
+                    label_bg_x2 = text_x + text_size[0] + 4
                     label_bg_y2 = text_y + text_size[1] + 4
-                    cv2.rectangle(image, (text_x - 2, text_y - text_size[1] - 5), (label_bg_x2, label_bg_y2), (255, 255, 0), -1)
-                    cv2.putText(image, label_str, (text_x, text_y), font, font_scale, (0, 0, 0), font_thickness)
-                    
+                    cv2.rectangle(annotated_image, (text_x - 2, text_y - text_size[1] - 4), 
+                                  (label_bg_x2, label_bg_y2), (255, 255, 0), -1)
+                    cv2.putText(annotated_image, label_str, (text_x, text_y), font, font_scale, (0, 0, 0), font_thickness)
+                
+                # Convert the annotated image back to RGB for display in Streamlit
+                annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
+                st.image(annotated_image_rgb, caption="Detected Growth Stages", use_column_width=True)
+    
     st.write("")
     st.write("Made by Team 45")
                     
