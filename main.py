@@ -11,7 +11,8 @@ label_map = {
     'Harvesting': 'Harvesting'
 }
 
-def preprocess(image):
+# Function to preprocess image for Thurinus Lettuce
+def preprocess_thurinus(image):
     hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     hsv_img[:, :, 0] = 60  # Change hue to a greenish value
     green_hued_img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2BGR)
@@ -30,17 +31,19 @@ def main():
     
     # Conditional display for file uploader based on plant type selection
     if option != "None":
+        st.write(f"Plant Type: {option}")
         uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
-
-        if option == "Thurinus Lettuce":
-            image = preprocess(image)
         
         if uploaded_file:
             # Read the uploaded image as a numpy array
             file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
             image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
             
-            # Display the uploaded image
+            # If the selected plant is Thurinus Lettuce, preprocess the image
+            if option == "Thurinus Lettuce":
+                image = preprocess_thurinus(image)
+            
+            # Display the uploaded (or preprocessed) image
             st.image(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
             
             # Detect growth stage button and results display
@@ -93,15 +96,15 @@ def main():
                 
                 # Display the model results using st.write()
                 if detection_results:
-                    st.write("### Results:")
+                    st.write("### Detection Results:")
                     for result in detection_results:
-                        st.write(f"     **Plant Type**: {option}")
-                        st.write(f"     **Plant Growth Stage**: {result['Label']}")
-                        st.write(f"     **Confidence**: {result['Confidence']}")
+                        st.write(f"**Label**: {result['Label']}")
+                        st.write(f"   **Confidence**: {result['Confidence']}")
+                        st.write(f"   **Bounding Box**: {result['Bounding Box']}")
                         st.write("-----")
                 
                 # Convert the annotated image to RGB for display in Streamlit
-                st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Processed Image", use_column_width=True)
+                st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
     
     st.write("")
     st.markdown("Made by Team 45")
