@@ -1,3 +1,6 @@
+import streamlit as st
+
+# Streamlit app
 def main():
     st.title("Ol'west Crafting: Raw Materials Calculator")
     st.write("This calculator will display the cumulative raw materials needed to craft each item. This is made by Renzo and tested by Cons, and Lazy.")
@@ -16,9 +19,6 @@ def main():
                                                         ])
     multiplier = st.number_input("Quantity", min_value=1, max_value=100, value=1, step=1)
     if st.button("Calculate Materials"):
-        # Calculate materials based on selected option
-        materials = calculate_materials(option, multiplier)
-
         # Display the calculated materials in a more organized way using Markdown
         st.markdown("### Materials Required:")
         st.write("Weapons that has prerequisites (e.g., Gold Morano requires Silver Morano), will only calculate the total materials from one tier to the other.")
