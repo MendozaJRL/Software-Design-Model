@@ -85,7 +85,7 @@ def main():
                 
                 # Display the model results using st.write()
                 if detection_results:
-                    st.write("###Results:")
+                    st.write("### Results:")
                     for result in detection_results:
                         st.write(f"     **Label**: {result['Label']}")
                         st.write(f"     **Confidence**: {result['Confidence']}")
