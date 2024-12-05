@@ -102,7 +102,6 @@ def main():
                     for result in detection_results:
                         st.write(f"**Label**: {result['Label']}")
                         st.write(f"   **Confidence**: {result['Confidence']}")
-                        st.write(f"   **Bounding Box**: {result['Bounding Box']}")
                         st.write("-----")
                 
                 # Convert the annotated image to RGB for display in Streamlit
