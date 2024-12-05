@@ -11,9 +11,9 @@ label_map = {
     'Harvesting': 'Harvesting'
 }
 
-def preprocess_image_with_green_hue(image_path):
-    hsv_img = cv2.cvtColor(image_path, cv2.COLOR_BGR2HSV)
-    hsv_img[:, :, 0] = 60
+def preprocess(image):
+    hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    hsv_img[:, :, 0] = 60  # Change hue to a greenish value
     green_hued_img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2BGR)
     return green_hued_img
 
@@ -33,7 +33,7 @@ def main():
         uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
 
         if option == "Thurinus Lettuce":
-            uploaded_file = preprocess_image_with_green_hue(uploaded_file)
+            image = preprocess(image)
         
         if uploaded_file:
             # Read the uploaded image as a numpy array
