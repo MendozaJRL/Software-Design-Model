@@ -41,11 +41,11 @@ def main():
                     class_name = model.names[class_id]
                     
                     # Draw bounding box
-                    cv2.rectangle(annotated_image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                    cv2.rectangle(annotated_image, (x1, y1), (x2, y2), (255, 255, 0), 8)
                     
                     # Put label
                     label = f"{class_name} ({confidence:.2f})"
-                    cv2.putText(annotated_image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                    cv2.putText(annotated_image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 0), 2)
                 
                 # Convert the annotated image to RGB for display in Streamlit
                 st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
