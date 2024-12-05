@@ -2,8 +2,8 @@ import streamlit as st
 
 # Streamlit app
 def main():
-    st.title("Ol'west Crafting: Raw Materials Calculator")
-    st.write("This calculator will display the cumulative raw materials needed to craft each item. This is made by Renzo and tested by Cons, and Lazy.")
+    st.title("Lumina Flora: Plant Growth Stage Detection Model")
+    st.write("The plant growth stage detecion model is a YOLOv8 Model that is capable of detecting plant growth stages specifically, germination, growing, and harvesting.")
 
     # Provide options for users to choose from
     option = st.selectbox("Select which item to craft", ["Spring", "Nail" , "Scrap Metal", 
@@ -43,7 +43,7 @@ def main():
                         st.write(f"<div style='margin-left: 20px;'>{item.replace('_', ' ').title()}: {materials[item]}</div>", unsafe_allow_html=True)
     
     st.write("")
-    st.write("Are there any inaccuracies, bugs or suggestions here is my discord:  renzomisago")
+    st.write("Made by Team 45")
                     
 # Run the app
 if __name__ == '__main__':
