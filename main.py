@@ -12,11 +12,7 @@ label_map = {
 }
 
 def preprocess_image_with_green_hue(image_path):
-    img = cv2.imread(image_path)
-    if img is None:
-        print(f"Error loading image: {image_path}")
-        return None
-    hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    hsv_img = cv2.cvtColor(image_path, cv2.COLOR_BGR2HSV)
     hsv_img[:, :, 0] = 60
     green_hued_img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2BGR)
     return green_hued_img
