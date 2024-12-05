@@ -87,7 +87,8 @@ def main():
                 if detection_results:
                     st.write("### Results:")
                     for result in detection_results:
-                        st.write(f"     **Label**: {result['Label']}")
+                        st.write(f"     **Plant Type**: {option}")
+                        st.write(f"     **Plant Growth Stage**: {result['Label']}")
                         st.write(f"     **Confidence**: {result['Confidence']}")
                         st.write("-----")
                 
