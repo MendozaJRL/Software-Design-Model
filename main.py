@@ -3,6 +3,14 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 
+# Define the label map
+label_map = {
+    'Flowering': 'Growing',
+    'Vegetative': 'Growing',
+    'Germination': 'Germination',
+    'Harvesting': 'Harvesting'
+}
+
 # Streamlit app
 def main():
     st.title("Lumina Flora: Plant Growth Stage Detection Model")
@@ -38,14 +46,28 @@ def main():
                 # Loop through detections and draw bounding boxes with OpenCV
                 for result in results[0].boxes.data.tolist():  # Assuming YOLOv8 outputs boxes as list
                     x1, y1, x2, y2, confidence, class_id = map(int, result[:6])
-                    class_name = model.names[class_id]
+                    original_label = model.names[class_id]
                     
-                    # Draw bounding box
-                    cv2.rectangle(annotated_image, (x1, y1), (x2, y2), (255, 255, 0), 8)
+                    # Map the detected label using label_map
+                    class_name = label_map.get(original_label, original_label)
                     
-                    # Put label
+                    # Draw bounding box with increased thickness
+                    cv2.rectangle(annotated_image, (x1, y1), (x2, y2), (255, 255, 0), 4)
+                    
+                    # Put label with larger font size and thickness
                     label = f"{class_name} ({confidence:.2f})"
-                    cv2.putText(annotated_image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 0), 2)
+                    font_scale = 1.0  # Larger font scale
+                    font_thickness = 2  # Thicker font
+                    text_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, font_scale, font_thickness)[0]
+                    text_x, text_y = x1, y1 - 10
+                    label_bg_x2 = text_x + text_size[0] + 4
+                    label_bg_y2 = text_y + text_size[1] + 4
+                    
+                    # Draw background rectangle for text
+                    cv2.rectangle(annotated_image, (text_x - 2, text_y - text_size[1] - 4), 
+                                  (label_bg_x2, label_bg_y2), (255, 255, 0), -1)
+                    cv2.putText(annotated_image, label, (text_x, text_y), 
+                                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness)
                 
                 # Convert the annotated image to RGB for display in Streamlit
                 st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
