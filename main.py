@@ -93,7 +93,7 @@ def main():
                         st.write("-----")
                 
                 # Convert the annotated image to RGB for display in Streamlit
-                st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption=f"{option} {result['Label']} {result['Confidence']}", use_column_width=True)
+                st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption=f"{option}: {result['Label']} ({result['Confidence']})", use_column_width=True)
     
     st.write("")
     st.markdown("Made by Team 45")
