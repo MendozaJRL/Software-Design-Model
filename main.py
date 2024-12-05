@@ -24,7 +24,7 @@ def main():
     
     # Conditional display for file uploader based on plant type selection
     if option != "None":
-        st.write(f"Plant Type: {option}")
+        st.write(f"**Plant Type**: {option}")
         uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
         
         if uploaded_file:
