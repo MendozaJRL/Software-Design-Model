@@ -11,7 +11,7 @@ def main():
     model = YOLO("40 Epoch Plant Growth Stage YOLOv8 Model.pt")
     
     # Provide options for users to choose from
-    option = st.selectbox("Select Plant Type:", ["None", "Olmetie Lettuce", "Thurinus Lettuce"])
+    option = st.selectbox("Select Level:", ["None", "Olmetie Lettuce", "Thurinus Lettuce"])
     
     # Conditional display for file uploader based on plant type selection
     if option != "None":
@@ -23,10 +23,9 @@ def main():
             if st.button("Detect Growth Stage"):
                 # Placeholder for model inference (add your detection logic here)
                 st.markdown("### Results:")
-                st.write("Detection complete! (Placeholder for model output)")
-    
+                    
     st.write("")
-    st.write("Made by Team 45")
+    st.markdown("Made by Team 45")
                     
 # Run the app
 if __name__ == '__main__':
