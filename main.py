@@ -10,11 +10,11 @@ def main():
     # Load your YOLOv8 model
     model = YOLO("40 Epoch Plant Growth Stage YOLOv8 Model.pt")
     
-    # File uploader
-    uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
-    
     # Provide options for users to choose from
     option = st.selectbox("Select Plant Type:", ["Level 1: Olmetie Lettuce", "Level 2: Thurinus Lettuce"])
+
+    # File uploader
+    uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
     
     if st.button("Detect Growth Stage"):
         # Display the calculated materials in a more organized way using Markdown
