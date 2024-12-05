@@ -37,14 +37,16 @@ def main():
         if uploaded_file:
             # Read the uploaded image as a numpy array
             file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-            image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+            original_image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)  # Original image
             
-            # Display the uploaded (or preprocessed) image
-            st.image(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
-
-            # If the selected plant is Thurinus Lettuce, preprocess the image
+            # Display the original uploaded image
+            st.image(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
+            
+            # Preprocess the image only if the plant type is Thurinus Lettuce
             if option == "Thurinus Lettuce":
-                image = preprocess_thurinus(image)
+                image = preprocess_thurinus(original_image)  # Apply preprocessing only for Thurinus Lettuce
+            else:
+                image = original_image  # Use original image if no preprocessing is required
             
             # Detect growth stage button and results display
             if st.button("Detect Growth Stage"):
@@ -55,7 +57,7 @@ def main():
                 detection_results = []
                 
                 # Get the original image dimensions
-                annotated_image = image.copy()
+                annotated_image = original_image.copy()  # Use the original image for annotation
                 
                 # Loop through detections and draw bounding boxes with OpenCV
                 for result in results[0].boxes.data.tolist():  # Assuming YOLOv8 outputs boxes as list
