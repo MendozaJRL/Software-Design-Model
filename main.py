@@ -52,6 +52,9 @@ def main():
                     # Map the detected label using label_map
                     class_name = label_map.get(class_name, class_name)
                     
+                    # Ensure the bounding box coordinates are integers
+                    x1, y1, x2, y2 = map(int, (x1, y1, x2, y2))
+                    
                     # Draw bounding box with increased thickness
                     cv2.rectangle(annotated_image, (x1, y1), (x2, y2), (255, 255, 0), 4)
                     
