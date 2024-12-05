@@ -37,7 +37,7 @@ def main():
         uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
 
         if option == "Thurinus Lettuce":
-            uploaded_file = preprocess_image_with_green_hue(image_path)
+            uploaded_file = preprocess_image_with_green_hue(uploaded_file)
         
         if uploaded_file:
             # Read the uploaded image as a numpy array
