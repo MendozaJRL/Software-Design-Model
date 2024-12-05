@@ -21,11 +21,18 @@ def main():
         if uploaded_file:
             # Detect growth stage button and results display
             if st.button("Detect Growth Stage"):
-                # Placeholder for model inference (add your detection logic here)
+                image = Image.open(uploaded_file)
+                results = model.predict(source=image, save=False, conf=0.25)
                 st.markdown("### Results:")
+                for r in results:
+                    st.write(f"Detected {r['name']} with confidence: {r['confidence']:.2f}")
+
+                # Save and display the prediction image with annotations
+                annotated_image = results[0].plot()  # Annotate first result
+                st.image(annotated_image, caption="Detected Growth Stages", use_column_width=True)
                     
     st.write("")
-    st.markdown("Made by Team 45")
+    st.write("Made by Team 45")
                     
 # Run the app
 if __name__ == '__main__':
