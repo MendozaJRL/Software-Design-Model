@@ -1,4 +1,6 @@
 import streamlit as st
+from PIL import Image
+from ultralytics import YOLO
 
 # Streamlit app
 def main():
@@ -7,22 +9,11 @@ def main():
 
     # Provide options for users to choose from
     option = st.selectbox("Select Plant Type:", ["Level 1: Olmetie Lettuce", "Level 2: Thurinus Lettuce"])
-    multiplier = st.number_input("Quantity", min_value=1, max_value=100, value=1, step=1)
-    if st.button("Calculate Materials"):
+    
+    if st.button("Detect Growth Stage"):
         # Display the calculated materials in a more organized way using Markdown
-        st.markdown("### Materials Required:")
-        st.write("Weapons that has prerequisites (e.g., Gold Morano requires Silver Morano), will only calculate the total materials from one tier to the other.")
-        st.write("For instance, selecting Gold Morano will show the total raw materials needed assuming you already have Silver Morano. It would not include the materials in making Silver Morano. This is to avoid confusion to the people with high-tier weapons.")
-        st.write("The rule above doesnt apply on normal crafting items such as chance runes, and gun's body parts")
-        categories = {
-            'Minerals': ['iron', 'lead', 'coal', 'silver', 'gold', 'ruby', 'diamond'],
-            'Logs': ['aspen', 'acacia', 'evergreen', 'spikey', 'fossil', 'crystal'],
-            'Pyramid Loots': ['normal_feather', 'spider_web', 'snake_skin'],
-            'Rune Fragments': ['common_rune', 'epic_rune', 'void'],
-            'Recipes': ['rare_recipe', 'epic_recipe', 'legendary_recipe'],
-            'Other': ['horseshoe']
-        }
-
+        st.markdown("### Results:")
+        
         for category, items in categories.items():
             # Check if any item in the category has a positive quantity
             any_positive = any(materials[item] > 0 for item in items)
