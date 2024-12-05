@@ -39,12 +39,12 @@ def main():
             file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
             image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
             
+            # Display the uploaded (or preprocessed) image
+            st.image(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
+
             # If the selected plant is Thurinus Lettuce, preprocess the image
             if option == "Thurinus Lettuce":
                 image = preprocess_thurinus(image)
-            
-            # Display the uploaded (or preprocessed) image
-            st.image(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
             
             # Detect growth stage button and results display
             if st.button("Detect Growth Stage"):
