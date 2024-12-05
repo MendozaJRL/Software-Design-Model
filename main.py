@@ -29,6 +29,13 @@ def main():
                 detected_labels = [results[0].names[int(label)] for label in labels]
                 updated_labels = []
 
+                label_map = {
+                    'Flowering': 'Growing',
+                    'Vegetative': 'Growing',
+                    'Germination': 'Germination',
+                    'Harvesting': 'Harvesting'
+                }
+                
                 for label in detected_labels:
                     if label in label_map:
                         updated_labels.append(label_map[label])
