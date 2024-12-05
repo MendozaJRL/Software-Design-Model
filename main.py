@@ -11,7 +11,7 @@ def main():
     model = YOLO("40 Epoch Plant Growth Stage YOLOv8 Model.pt")
     
     # Provide options for users to choose from
-    option = st.selectbox("Select Plant Type:", ["None", "Level 1: Olmetie Lettuce", "Level 2: Thurinus Lettuce"])
+    option = st.selectbox("Select Plant Type:", ["None", "Olmetie Lettuce", "Thurinus Lettuce"])
     
     # Conditional display for file uploader based on plant type selection
     if option != "None":
