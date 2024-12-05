@@ -14,15 +14,6 @@ def main():
         # Display the calculated materials in a more organized way using Markdown
         st.markdown("### Results:")
         
-        for category, items in categories.items():
-            # Check if any item in the category has a positive quantity
-            any_positive = any(materials[item] > 0 for item in items)
-            if any_positive:
-                st.write(f"#### {category}")
-                for item in items:
-                    if materials[item] > 0:
-                        st.write(f"<div style='margin-left: 20px;'>{item.replace('_', ' ').title()}: {materials[item]}</div>", unsafe_allow_html=True)
-    
     st.write("")
     st.write("Made by Team 45")
                     
