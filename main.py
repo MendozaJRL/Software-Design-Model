@@ -129,11 +129,11 @@ def main():
 
                     if detection_results:
                         st.markdown("<p class='subheader'>Device Configuration</p>", unsafe_allow_html=True)
-                        for result in detection_results:
+                        for result in detection_results:  # Iterate through the list of results
                             response = get_system_response(option, result['Label'])
                             if response:
-                                st.markdown(f"<p class='settings'>🌈 <b>Growth Stage:</b> {detection_results['Label']}</p>", unsafe_allow_html=True)
-                                st.markdown(f"<p class='settings'>🌈 <b>Confidence:</b> {detection_results['Confidence']}</p>", unsafe_allow_html=True)
+                                st.markdown(f"<p class='settings'>🌈 <b>Growth Stage:</b> {result['Label']}</p>", unsafe_allow_html=True)
+                                st.markdown(f"<p class='settings'>🌈 <b>Confidence:</b> {result['Confidence']}</p>", unsafe_allow_html=True)
                                 st.markdown(f"<p class='settings'>🌈 <b>Light Color:</b> {response['light_color']}</p>", unsafe_allow_html=True)
                                 st.markdown(f"<p class='settings'>💡 <b>Light Intensity:</b> {response['light_intensity']}</p>", unsafe_allow_html=True)
                                 st.markdown(f"<p class='settings'>🌡️ <b>Temperature:</b> {response['temperature']}</p>", unsafe_allow_html=True)
