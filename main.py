@@ -145,9 +145,9 @@ def main():
                             response = get_system_response(option, result['Label'])
                             if response:
                                 st.write("**Recommended Settings:**")
-                                st.write(f"- Light Color: {response['light_color']}")
-                                st.write(f"- Light Intensity: {response['light_intensity']}")
-                                st.write(f"- Temperature: {response['temperature']}")
+                                st.write(f"🌈 **Light Color:** {response['light_color']}")
+                                st.write(f"💡 **Light Intensity:** {response['light_intensity']}")
+                                st.write(f"🌡️ **Temperature:** {response['temperature']}")
                             st.write("----")
                                 
                     # Pass the annotated image to column 2 for display
