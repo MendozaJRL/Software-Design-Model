@@ -73,7 +73,9 @@ def main():
 
         with col1:
             st.header("Input Phase")
+            st.markdown("<div style='border: 2px solid black; padding: 10px; border-radius: 5px;'>", unsafe_allow_html=True)
             uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
+            st.markdown("</div>", unsafe_allow_html=True)
 
             if uploaded_file:
                 # Read the uploaded image as a numpy array
@@ -137,6 +139,7 @@ def main():
                     # Display the model results using st.write()
                     if detection_results:
                         st.header("Device Configuration")
+                        st.markdown("<div style='border: 2px solid black; padding: 10px; border-radius: 5px;'>", unsafe_allow_html=True)
                         for result in detection_results:
                             st.write(f"**Label**: {result['Label']}")
                             st.write(f"   **Confidence**: {result['Confidence']}")
@@ -148,16 +151,19 @@ def main():
                                 for key, value in stage_response.items():
                                     st.write(f"   - {key}: {value}")
                             st.write("----")
+                        st.markdown("</div>", unsafe_allow_html=True)
 
                     # Pass the annotated image to column 2 for display
                     with col2:                                                       
                         st.header("Detection Results:")
+                        st.markdown("<div style='border: 2px solid black; padding: 10px; border-radius: 5px;'>", unsafe_allow_html=True)
 
                         # Display the original uploaded image
                         st.image(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
 
-                        # Display the original uploaded image
+                        # Display the annotated image
                         st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
+                        st.markdown("</div>", unsafe_allow_html=True)
 
     st.write("")
     st.markdown("Made by Team 45")
