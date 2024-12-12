@@ -66,6 +66,8 @@ def main():
         <style>
         .header {font-size:52px; font-weight:bold; text-align:center; color: #117A65;}
         .subheader {font-size:28px; font-weight:bold; text-align:left; color: #117A65;}
+        .settings {font-size:20px; font-weight:bold; color: #34495E;}
+        .sidebar-names li {margin-bottom: 0px;}
         </style>
     """, unsafe_allow_html=True)
 
@@ -130,10 +132,9 @@ def main():
                         for result in detection_results:
                             response = get_system_response(option, result['Label'])
                             if response:
-                                st.write("**Recommended Settings:**")
-                                st.write(f"🌈 **Light Color:** {response['light_color']}")
-                                st.write(f"💡 **Light Intensity:** {response['light_intensity']}")
-                                st.write(f"🌡️ **Temperature:** {response['temperature']}")
+                                st.markdown(f"<p class='settings'>🌈 <b>Light Color:</b> {response['light_color']}</p>", unsafe_allow_html=True)
+                                st.markdown(f"<p class='settings'>💡 <b>Light Intensity:</b> {response['light_intensity']}</p>", unsafe_allow_html=True)
+                                st.markdown(f"<p class='settings'>🌡️ <b>Temperature:</b> {response['temperature']}</p>", unsafe_allow_html=True)
                             st.write("----")
 
                     with col2:
@@ -141,11 +142,14 @@ def main():
                         st.image(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", width=300)
                         st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", width=300)
 
-    st.sidebar.markdown("Made by Team 45")
-    st.sidebar.write("- Dela Cruz, Akio Gavin")
-    st.sidebar.write("- Mendoza, John Renz")
-    st.sidebar.write("- Moreno, Remar")
-    st.sidebar.write("- Villaueva, Mark John")
+    st.sidebar.markdown("""
+        <ul class="sidebar-names">
+            <li>Dela Cruz, Akio Gavin</li>
+            <li>Mendoza, John Renz</li>
+            <li>Moreno, Remar</li>
+            <li>Villanueva, Mark John</li>
+        </ul>
+    """, unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main()
