@@ -34,7 +34,7 @@ def main():
         col1, col2 = st.columns(2)  # Create two columns
         
         with col1:
-            st.header("Input")
+            st.header("Input Phase")
             uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
             
             if uploaded_file:
@@ -98,7 +98,7 @@ def main():
                     
                         # Display the model results using st.write()
                         if detection_results:
-                            st.header("Results")
+                            st.header("Device Configuration")
                             for result in detection_results:
                                 st.write(f"**Label**: {result['Label']}")
                                 st.write(f"   **Confidence**: {result['Confidence']}")
