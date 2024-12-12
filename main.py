@@ -67,27 +67,7 @@ def main():
     model = YOLO("40 Epoch Plant Growth Stage YOLOv8 Model.pt")
  
     # Provide options for users to choose from
-    # Custom CSS to change the font color of specific options
-    st.markdown("""
-        <style>
-        .custom-selectbox option[value="None"] {
-            color: red !important;
-        }
-        .custom-selectbox option[value="Olmetie Lettuce"] {
-            color: green !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    
-    # Inject custom CSS class into the selectbox using HTML
-    option = st.selectbox(
-        "Select Level:",
-        ["None", "Olmetie Lettuce", "Thurinus Lettuce"],
-        key="selectbox",
-        format_func=lambda x: f'<div class="custom-selectbox">{x}</div>'
-    )
-    
-    # option = st.selectbox("Select Level:", ["None", "Olmetie Lettuce", "Thurinus Lettuce"])
+    option = st.selectbox("Select Level:", ["None", "Olmetie Lettuce", "Thurinus Lettuce"])
     
     if option != "None":
         st.write(f"Plant Type: {option}")
