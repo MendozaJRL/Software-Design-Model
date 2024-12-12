@@ -140,8 +140,11 @@ def main():
                     if detection_results:
                         st.header("Device Configuration")
                         for result in detection_results:
-                            st.write(f"**Label**: {result['Label']}")
-                            st.write(f"   **Confidence**: {result['Confidence']}")
+                            st.markdown(f"<h3 style='font-size:20px;'>Detected Stage: {result['Label']}</h3>", unsafe_allow_html=True)
+                            st.markdown(f"<p style='font-size:16px;'>Confidence: {result['Confidence']}</p>", unsafe_allow_html=True)
+
+                            #st.write(f"**Label**: {result['Label']}")
+                            #st.write(f"   **Confidence**: {result['Confidence']}")
                             response = get_system_response(option, result['Label'])
                             if response:
                                 st.write("**Recommended Settings:**")
