@@ -64,8 +64,8 @@ def main():
 
     st.markdown("""
         <style>
-        .header {font-size:24px; font-weight:bold; text-align:center; color: #2E86C1;}
-        .subheader {font-size:20px; font-weight:bold; text-align:left; color: #117A65;}
+        .header {font-size:48px; font-weight:bold; text-align:center; color: #117A65;}
+        .subheader {font-size:28px; font-weight:bold; text-align:left; color: #117A65;}
         </style>
     """, unsafe_allow_html=True)
 
