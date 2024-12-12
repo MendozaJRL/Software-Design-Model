@@ -34,7 +34,7 @@ def main():
         col1, col2 = st.columns(2)  # Create two columns
         
         with col1:
-            st.header("Upload and Results")
+            st.header("Input")
             uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
             
             if uploaded_file:
@@ -98,7 +98,7 @@ def main():
                     
                         # Display the model results using st.write()
                         if detection_results:
-                            st.header("Detection Results:")
+                            st.header("Results")
                             for result in detection_results:
                                 st.write(f"**Label**: {result['Label']}")
                                 st.write(f"   **Confidence**: {result['Confidence']}")
@@ -106,10 +106,12 @@ def main():
                                 
                     # Pass the annotated image to column 2 for display
                     with col2:                                                       
+                        st.header("Detection Results:")
+                        
                         # Display the original uploaded image
                         st.image(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
-                        
-                        st.write("Detected Stages")
+
+                        # Display the original uploaded image
                         st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
 
 
