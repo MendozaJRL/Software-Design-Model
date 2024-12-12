@@ -64,7 +64,7 @@ def main():
 
     st.markdown("""
         <style>
-        .header {font-size:48px; font-weight:bold; text-align:center; color: #117A65;}
+        .header {font-size:52px; font-weight:bold; text-align:center; color: #117A65;}
         .subheader {font-size:28px; font-weight:bold; text-align:left; color: #117A65;}
         </style>
     """, unsafe_allow_html=True)
@@ -142,6 +142,10 @@ def main():
                         st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", width=300)
 
     st.sidebar.markdown("Made by Team 45")
+    st.sidebar.write("- Dela Cruz, Akio Gavin")
+    st.sidebar.write("- Mendoza, John Renz")
+    st.sidebar.write("- Moreno, Remar")
+    st.sidebar.write("- Villaueva, Mark John")
 
 if __name__ == '__main__':
     main()
