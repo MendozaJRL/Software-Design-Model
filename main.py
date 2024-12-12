@@ -24,25 +24,35 @@ def get_system_response(plant_type, growth_stage):
         "Olmetie Lettuce": {
             "Germination": {
                 "light_color": "white",
-                "light_intensity": "1000 ppfd",
+                "light_intensity": "1000 lux",
                 "temperature": "26°C"
             },
             "Growing": {
                 "light_color": "blue",
-                "light_intensity": "1500 ppfd",
+                "light_intensity": "1500 lux",
+                "temperature": "24°C"
+            },
+            "Harvesting": {
+                "light_color": "blue",
+                "light_intensity": "1500 lux",
                 "temperature": "24°C"
             }
         },
         "Thurinus Lettuce": {
             "Germination": {
                 "light_color": "white",
-                "light_intensity": "1200 ppfd",
+                "light_intensity": "1200 lux",
                 "temperature": "27°C"
             },
             "Growing": {
                 "light_color": "blue",
-                "light_intensity": "1600 ppfd",
+                "light_intensity": "1600 ppluxfd",
                 "temperature": "25°C"
+            },
+            "Harvesting": {
+                "light_color": "blue",
+                "light_intensity": "1500 lux",
+                "temperature": "24°C"
             }
         }
     }
