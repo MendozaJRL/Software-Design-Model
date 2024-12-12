@@ -25,7 +25,7 @@ def main():
         """
         <style>
         body {
-            background-image: url('https://th.bing.com/th/id/OIP.ExdT_32yrkoBDZcVTlhT5wHaE8?rs=1&pid=ImgDetMain');
+            background-image: url('bg.jpg');
             background-size: cover;
             color: white;
         }
