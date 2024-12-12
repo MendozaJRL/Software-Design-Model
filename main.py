@@ -20,33 +20,6 @@ def preprocess_thurinus(image):
 
 # Streamlit app
 def main():
-    # Add custom CSS for styling and background image
-    st.markdown(
-        """
-        <style>
-        body {
-            background-image: url('bg.jpg');
-            background-size: cover;
-            color: white;
-        }
-        .stButton > button {
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 12px;
-            padding: 10px 24px;
-        }
-        .stHeader, .stFooter {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        .stTitle {
-            font-family: 'Arial', sans-serif;
-            text-shadow: 2px 2px 4px #000000;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
     st.title("Lumina Flora: Plant Growth Stage Detection Model")
     st.write("The plant growth stage detection model is a YOLOv8 Model that is capable of detecting plant growth stages: germination, growing, and harvesting.")
 
