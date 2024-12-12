@@ -18,6 +18,46 @@ def preprocess_thurinus(image):
     green_hued_img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2BGR)
     return green_hued_img
 
+# Function to provide system response based on growth stage and plant type
+def get_system_response(plant_type, growth_stage):
+    responses = {
+        "Olmetie Lettuce": {
+            "Germination": {
+                "light_color": "Blue",
+                "light_intensity": "5,000-10,000 lux",
+                "temperature": "16-20°C"
+            },
+            "Growing": {
+                "light_color": "Red + Blue",
+                "light_intensity": "15,000-20,000 lux",
+                "temperature": "18-22°C"
+            },
+            "Harvesting": {
+                "light_color": "Red + Blue",
+                "light_intensity": "15,000-20,000 lux",
+                "temperature": "18-22°C"
+            }
+        },
+        "Thurinus Lettuce": {
+            "Germination": {
+                "light_color": "Blue",
+                "light_intensity": "5,000-8,000 lux",
+                "temperature": "15-19°C"
+            },
+            "Growing": {
+                "light_color": "Red + Blue",
+                "light_intensity": "12,000-18,000 lux",
+                "temperature": "18-24°C"
+            },
+            "Harvesting": {
+                "light_color": "Red + Blue",
+                "light_intensity": "12,000-18,000 lux",
+                "temperature": "18-24°C"
+            }
+        }
+    }
+    return responses.get(plant_type, {}).get(growth_stage, {})
+
 # Streamlit app
 def main():
     st.title("Lumina Flora: Plant Growth Stage Detection Model")
@@ -25,7 +65,7 @@ def main():
 
     # Load your YOLOv8 model
     model = YOLO("40 Epoch Plant Growth Stage YOLOv8 Model.pt")
-    
+ 
     # Provide options for users to choose from
     option = st.selectbox("Select Level:", ["None", "Olmetie Lettuce", "Thurinus Lettuce"])
     
@@ -96,13 +136,17 @@ def main():
                             'Bounding Box': (x1, y1, x2, y2)
                         })
                     
-                        # Display the model results using st.write()
-                        if detection_results:
-                            st.header("Device Configuration")
-                            for result in detection_results:
-                                st.write(f"**Label**: {result['Label']}")
-                                st.write(f"   **Confidence**: {result['Confidence']}")
-                                st.write("----")
+                    # Display the model results using st.write()
+                    if detection_results:
+                        st.header("Device Configuration")
+                        for result in detection_results:
+                            response = get_system_response(option, result['Label'])
+                            if response:
+                                st.write("**Recommended Settings:**")
+                                st.write(f"🌈 **Light Color:** {response['light_color']}")
+                                st.write(f"💡 **Light Intensity:** {response['light_intensity']}")
+                                st.write(f"🌡️ **Temperature:** {response['temperature']}")
+                            st.write("----")
                                 
                     # Pass the annotated image to column 2 for display
                     with col2:                                                       
