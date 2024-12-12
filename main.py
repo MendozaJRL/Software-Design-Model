@@ -65,6 +65,15 @@ def main():
 
     # Load your YOLOv8 model
     model = YOLO("40 Epoch Plant Growth Stage YOLOv8 Model.pt")
+
+    # Add custom CSS for selectbox font color
+    st.markdown("""
+        <style>
+        .stSelectbox label {
+            color: blue;  /* Change label text color */
+        }
+        </style>
+    """, unsafe_allow_html=True)
     
     # Provide options for users to choose from
     option = st.selectbox("Select Level:", ["None", "Olmetie Lettuce", "Thurinus Lettuce"])
