@@ -23,36 +23,36 @@ def get_system_response(plant_type, growth_stage):
     responses = {
         "Olmetie Lettuce": {
             "Germination": {
-                "light_color": "white",
-                "light_intensity": "1000 lux",
-                "temperature": "26°C"
+                "light_color": "Blue",
+                "light_intensity": "5,000-10,000 lux",
+                "temperature": "16-20°C"
             },
             "Growing": {
-                "light_color": "blue",
-                "light_intensity": "1500 lux",
-                "temperature": "24°C"
+                "light_color": "Red + Blue",
+                "light_intensity": "15,000-20,000 lux",
+                "temperature": "18-22°C"
             },
             "Harvesting": {
-                "light_color": "blue",
-                "light_intensity": "1500 lux",
-                "temperature": "24°C"
+                "light_color": "Red + Blue",
+                "light_intensity": "15,000-20,000 lux",
+                "temperature": "18-22°C"
             }
         },
         "Thurinus Lettuce": {
             "Germination": {
-                "light_color": "white",
-                "light_intensity": "1200 lux",
-                "temperature": "27°C"
+                "light_color": "Blue",
+                "light_intensity": "5,000-8,000 lux",
+                "temperature": "15-19°C"
             },
             "Growing": {
-                "light_color": "blue",
-                "light_intensity": "1600 ppluxfd",
-                "temperature": "25°C"
+                "light_color": "Red + Blue",
+                "light_intensity": "12,000-18,000 lux",
+                "temperature": "18-24°C"
             },
             "Harvesting": {
-                "light_color": "blue",
-                "light_intensity": "1500 lux",
-                "temperature": "24°C"
+                "light_color": "Red + Blue",
+                "light_intensity": "12,000-18,000 lux",
+                "temperature": "18-24°C"
             }
         }
     }
@@ -140,8 +140,6 @@ def main():
                     if detection_results:
                         st.header("Device Configuration")
                         for result in detection_results:
-                            #st.write(f"**Label**: {result['Label']}")
-                            #st.write(f"   **Confidence**: {result['Confidence']}")
                             response = get_system_response(option, result['Label'])
                             if response:
                                 st.write("**Recommended Settings:**")
