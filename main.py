@@ -91,7 +91,9 @@ def main():
                                       (label_bg_x2, label_bg_y2), (255, 255, 0), -1)
                         cv2.putText(annotated_image, label, (text_x, text_y), 
                                     cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness)
-                        
+                                                              
+                    # Pass the annotated image to column 2 for display
+                    with col2:
                         # Append the result to the list
                         detection_results.append({
                             'Label': class_name,
@@ -99,19 +101,19 @@ def main():
                             'Bounding Box': (x1, y1, x2, y2)
                         })
                     
-                    # Display the model results using st.write()
-                    if detection_results:
-                        st.write("### Detection Results:")
-                        for result in detection_results:
-                            st.write(f"**Label**: {result['Label']}")
-                            st.write(f"   **Confidence**: {result['Confidence']}")
-                            st.write("-----")
-                    
-                    # Pass the annotated image to column 2 for display
-                    with col2:
+                        # Display the model results using st.write()
+                        if detection_results:
+                            st.write("### Detection Results:")
+                            for result in detection_results:
+                                st.write(f"**Label**: {result['Label']}")
+                                st.write(f"   **Confidence**: {result['Confidence']}")
+                                st.write("-----")
+                            
                         st.header("Detected Stages")
                         st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
-    
+
+
+                        
     st.write("")
     st.markdown("Made by Team 45")
                     
