@@ -107,8 +107,7 @@ def main():
                             for result in detection_results:
                                 st.write(f"**Label**: {result['Label']}")
                                 st.write(f"   **Confidence**: {result['Confidence']}")
-                                st.write("-----")
-                            
+                                                            
                         st.write("Detected Stages")
                         st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
 
