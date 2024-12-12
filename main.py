@@ -42,9 +42,6 @@ def main():
                 file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
                 original_image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)  # Original image
                 
-                # Display the original uploaded image
-                st.image(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
-                
                 # Preprocess the image only if the plant type is Thurinus Lettuce
                 if option == "Thurinus Lettuce":
                     image = preprocess_thurinus(original_image)  # Apply preprocessing only for Thurinus Lettuce
@@ -91,9 +88,7 @@ def main():
                                       (label_bg_x2, label_bg_y2), (255, 255, 0), -1)
                         cv2.putText(annotated_image, label, (text_x, text_y), 
                                     cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness)
-                                                              
-                    # Pass the annotated image to column 2 for display
-                    with col2:
+
                         # Append the result to the list
                         detection_results.append({
                             'Label': class_name,
@@ -108,7 +103,12 @@ def main():
                                 st.write(f"**Label**: {result['Label']}")
                                 st.write(f"   **Confidence**: {result['Confidence']}")
                                 st.write("----")
-                                                            
+                                
+                    # Pass the annotated image to column 2 for display
+                    with col2:                                                       
+                        # Display the original uploaded image
+                        st.image(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", use_column_width=True)
+                        
                         st.write("Detected Stages")
                         st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", use_column_width=True)
 
