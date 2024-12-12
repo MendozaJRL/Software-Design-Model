@@ -142,9 +142,9 @@ def main():
                         st.image(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB), caption="Uploaded Image", width=300)
                         st.image(cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB), caption="Detected Growth Stages", width=300)
 
-    st.sidebar.markdown("Made by Team 45")
     st.sidebar.markdown("""
         <ul class="sidebar-names">
+            Made by Team 45
             <li>Dela Cruz, Akio Gavin</li>
             <li>Mendoza, John Renz</li>
             <li>Moreno, Remar</li>
